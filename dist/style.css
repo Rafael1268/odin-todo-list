@@ -80,6 +80,7 @@ nav {
   padding: 25px 50px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 #search i {
@@ -96,4 +97,21 @@ nav {
   padding-left: 40px;
   color: #F26BDC;
   font-size: 1.2rem;
+}
+
+#sorting label {
+  color: #F26BDC;
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+#sorting select {
+  background-color: #1D1C40;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  color: #F26BDC;
+  font-size: 1.05rem;
+  appearance: none;
 }
