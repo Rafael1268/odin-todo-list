@@ -1,3 +1,14 @@
+:root {
+  --darkest-color: #151426;
+  --dark-color: #1D1C40;
+  --main-color: #F26BDC;
+  --second-color: #00C8FF;
+  --light-color: #E0E0F6;
+  --red-d-color: #FF5242;
+  --yellow-d-color: #ffff1f;
+  --green-d-color: #02ec4c;
+}
+
 * {
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
@@ -6,15 +17,21 @@
 }
 
 h1 {
-  color: #F26BDC;
+  color: var(--main-color);
   text-decoration: underline;
   margin-bottom: 10px;
 }
 
 h2 {
-  color: #F26BDC;
+  color: var(--main-color);
   margin-top: 25px;
   margin-bottom: 10px;
+}
+
+h6 {
+  color: var(--main-color);
+  font-size: 0.8rem;
+  margin: 0 10px;
 }
 
 #content {
@@ -23,7 +40,7 @@ h2 {
 
 /* Sidebar */
 #sidebar {
-  background-color: #151426;
+  background-color: var(--darkest-color);
   width: 22.5vw;
   height: 100vh;
   padding: 25px 0;
@@ -34,7 +51,7 @@ h2 {
   background: none;
   border: none;
   border-radius: 10px;
-  color: #E0E0F6;
+  color: var(--light-color);
   font-size: 1.2rem;
   font-weight: 600;
   padding: 10px;
@@ -42,7 +59,7 @@ h2 {
 }
 
 #sidebar button:hover {
-  background-color: #1D1C40;
+  background-color: var(--dark-color);
 }
 
 #mainControls {
@@ -65,13 +82,13 @@ h2 {
 
 /* Main content */
 #tasks {
-  background-color: #1D1C40;
+  background-color: var(--dark-color);
   width: 77.5vw;
   height: 100vh;
 }
 
 nav {
-  background-color: #151426;
+  background-color: var(--darkest-color);
   border-radius: 100px;
   position: fixed;
   top: 20px;
@@ -84,34 +101,107 @@ nav {
 }
 
 #search i {
-  color: #F26BDC;
+  color: var(--main-color);
   position: relative;
   margin-right: -35px;
 }
 
 #searchbar {
-  background-color: #1D1C40;
+  background-color: var(--dark-color);
   border: none;
   border-radius: 25px;
   padding: 10px 15px;
   padding-left: 40px;
-  color: #F26BDC;
+  color: var(--main-color);
   font-size: 1.2rem;
 }
 
 #sorting label {
-  color: #F26BDC;
+  color: var(--main-color);
   font-size: 1.05rem;
   font-weight: bold;
   margin-right: 5px;
 }
 
 #sorting select {
-  background-color: #1D1C40;
+  background-color: var(--dark-color);
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
-  color: #F26BDC;
+  color: var(--main-color);
   font-size: 1.05rem;
   appearance: none;
+}
+
+/* Task styling */
+#taskList {
+  margin: 0 5vw;
+  margin-top: 125px;
+}
+
+.taskItem {
+  background-color: var(--darkest-color);
+  border-radius: 5px;
+  margin: 15px 0;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskItemL {
+  display: flex;
+  align-items: center;
+}
+
+.taskItemR {
+  display: flex;
+  align-items: center;
+}
+
+#taskList h1 {
+  margin-top: 150px;
+}
+
+#taskList p {
+  color: var(--light-color);
+  font-size: 1.2rem;
+  margin-left: 15px;
+}
+
+#taskList i {
+  color: var(--main-color);
+  align-self: flex-end;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+}
+
+.taskDoneBtn {
+  background-color: var(--darkest-color);
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+}
+
+.prior1 {
+  border: 3px solid var(--red-d-color);
+}
+
+.prior2 {
+  border: 3px solid var(--yellow-d-color);
+}
+
+.prior3 {
+  border: 3px solid var(--green-d-color);
+}
+
+.taskDone {
+  border: 3px solid var(--dark-color);
+}
+
+.taskComplete {
+  text-decoration: line-through;
 }
