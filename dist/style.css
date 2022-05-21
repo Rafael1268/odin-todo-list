@@ -19,7 +19,6 @@
 h1 {
   color: var(--main-color);
   text-decoration: underline;
-  margin-bottom: 10px;
 }
 
 h2 {
@@ -134,6 +133,23 @@ nav {
 }
 
 /* Task styling */
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 150px;
+}
+
+#header button {
+  background-color: var(--darkest-color);
+  border: none;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--light-color);
+  padding: 10px 25px;
+}
+
 #taskList {
   margin: 0 5vw;
   margin-top: 125px;
@@ -157,10 +173,6 @@ nav {
 .taskItemR {
   display: flex;
   align-items: center;
-}
-
-#taskList h1 {
-  margin-top: 150px;
 }
 
 #taskList p {
