@@ -5,10 +5,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/4032eacfd2.js" crossorigin="anonymous"></script>
   <title>NextUp</title>
 </head>
 <body>
-  <div id="content"></div>
+  <div id="content">
+    <div id="sidebar">
+      <div id="mainControls">
+        <h1>NextUp</h1>
+        <button><i class="fa-solid fa-folder-open fa-fw"></i> All Tasks</button>
+        <button><i class="fa-solid fa-calendar-day fa-fw"></i> Today</button>
+        <button><i class="fa-solid fa-calendar-week fa-fw"></i> This Week</button>
+      </div>
+      <div id="projects">
+        <h2>Projects</h2>
+        <button><i class="fa-solid fa-folder fa-fw"></i> Example Project Name</button>
+      </div>
+    </div>
+    <div id="tasks">
+      <nav>
+        <div id="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" name="searchbar" id="searchbar">
+        </div>
+        <div id="sorting">
+          <select name="sortBy" id="sortBy">
+            <option value="test">Default Option</option>
+          </select>
+        </div>
+      </nav>
+      <div id="taskList"></div>
+    </div>
+  </div>
   <script src="main.js"></script>
 </body>
 </html>
