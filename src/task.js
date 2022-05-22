@@ -1,5 +1,7 @@
 const newTaskBtn = document.querySelector('#newTaskBtn');
 newTaskBtn.addEventListener('click', () => addTask());
+const addTaskBtn = document.querySelector('#addTaskBtn');
+addTaskBtn.addEventListener('click', () => addTaskField());
 let tasks = [];
 
 const createTask = (task, date, priority, project) => {
@@ -20,6 +22,15 @@ function addTask() {
   renderTasks();
 };
 
+function addTaskField() {
+  const newTaskField = document.querySelector('.newTask');
+  if (newTaskField.id === 'hideNewTaskField') {
+    newTaskField.removeAttribute('id');
+  } else {
+    newTaskField.id = 'hideNewTaskField';
+  };
+};
+
 function renderTasks() {
   const taskDisplay = document.querySelector('#taskDisplay');
   taskDisplay.innerHTML = '';
@@ -27,7 +38,6 @@ function renderTasks() {
   tasks.forEach(task => {
     const taskItem = document.createElement('div');
     taskItem.className = 'taskItem';
-    taskItem.id = id;
     const taskItemL = document.createElement('div');
     taskItemL.className = 'taskItemL';
     taskItem.appendChild(taskItemL);
@@ -36,7 +46,6 @@ function renderTasks() {
     taskItem.appendChild(taskItemR);
     const taskDoneBtn = document.createElement('button');
     taskDoneBtn.classList.add('taskDoneBtn');
-    console.log(task.getPriority());
     switch (task.getPriority()) {
       case '1':
         taskDoneBtn.classList.add('prior1');
@@ -57,11 +66,18 @@ function renderTasks() {
   taskItemR.appendChild(taskDate);
   const deleteBtn = document.createElement('button');
   deleteBtn.className = 'deleteBtn';
+  deleteBtn.id = id;
   deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
   taskItemR.appendChild(deleteBtn);
+  deleteBtn.addEventListener('click', () => deleteTask(event));
   taskDisplay.appendChild(taskItem);
   id++;
   });
+};
+
+function deleteTask(e) {
+  tasks.splice(e.target.parentNode.id, 1);
+  renderTasks();
 };
 
 export { renderTasks };
