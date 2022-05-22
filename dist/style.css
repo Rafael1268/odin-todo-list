@@ -41,7 +41,6 @@ h6 {
 #sidebar {
   background-color: var(--darkest-color);
   width: 22.5vw;
-  height: 100vh;
   padding: 25px 0;
   padding-left: 25px;
 }
@@ -83,7 +82,7 @@ h6 {
 #tasks {
   background-color: var(--dark-color);
   width: 77.5vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 nav {
@@ -233,6 +232,7 @@ nav {
   color: var(--light-color);
   font-size: 1.2rem;
   margin-left: 15px;
+  word-break: break-all;
 }
 
 #taskList i {
