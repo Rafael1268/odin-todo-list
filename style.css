@@ -155,7 +155,8 @@ nav {
   margin-top: 125px;
 }
 
-.taskItem {
+.taskItem,
+#newTask {
   background-color: var(--darkest-color);
   border-radius: 5px;
   margin: 15px 0;
@@ -163,6 +164,37 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#newTaskTxt {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  border: none;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  width: 60%;
+  padding: 5px 15px;
+}
+
+#newTaskDate {
+  background-color: var(--dark-color);
+  color: var(--main-color);
+  border: none;
+  border-radius: 2px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 15px;
+  padding: 7px 5px;
+}
+
+#newTaskBtn {
+  background-color: var(--dark-color);
+  color: var(--main-color);
+  border: none;
+  border-radius: 2px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 6px 15px;
 }
 
 .taskItemL {
