@@ -155,8 +155,7 @@ nav {
   margin-top: 125px;
 }
 
-.taskItem,
-#newTask {
+.taskItem {
   background-color: var(--darkest-color);
   border-radius: 5px;
   margin: 15px 0;
@@ -166,27 +165,34 @@ nav {
   align-items: center;
 }
 
+#newTask {
+  background-color: var(--darkest-color);
+  margin: 15px 0;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+#newTask div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 #newTaskTxt {
   background-color: var(--dark-color);
   color: var(--light-color);
   border: none;
   border-radius: 3px;
   font-size: 1.2rem;
-  width: 60%;
+  width: 100%;
+  margin-bottom: 15px;
   padding: 5px 15px;
 }
 
-#newTaskDate {
-  background-color: var(--dark-color);
-  color: var(--main-color);
-  border: none;
-  border-radius: 2px;
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 0 15px;
-  padding: 7px 5px;
-}
-
+#newTaskDate,
+#newTaskPriority,
+#newTaskProject,
 #newTaskBtn {
   background-color: var(--dark-color);
   color: var(--main-color);
@@ -194,7 +200,23 @@ nav {
   border-radius: 2px;
   font-size: 1.1rem;
   font-weight: bold;
-  padding: 6px 15px;
+  margin-left: 15px;
+}
+
+#newTaskDate {
+  padding: 7px 5px;
+}
+
+#newTaskPriority {
+  padding: 7px 15px;
+}
+
+#newTaskProject {
+  padding: 7px 15px;
+}
+
+#newTaskBtn {
+  padding: 7px 25px;
 }
 
 .taskItemL {

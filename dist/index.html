@@ -41,11 +41,21 @@
           <button>Add Task</button>
         </div>
         <div id="newTask">
-          <input type="text" name="newTaskTxt" id="newTaskTxt" minlength="1" maxlength="100">
-          <div>
-            <input type="date" name="newTaskDate" id="newTaskDate">
-            <button type="submit" id="newTaskBtn">Done</button>
-          </div>
+          <form action="#">
+            <input type="text" name="newTaskTxt" id="newTaskTxt" minlength="1" maxlength="100" required>
+            <div>
+              <input type="date" name="newTaskDate" id="newTaskDate">
+              <select name="newTaskPriority" id="newTaskPriority" required>
+                <option value="1">Priority 1</option>
+                <option value="2">Priority 2</option>
+                <option value="3">Priority 3</option>
+              </select>
+              <select name="newTaskProject" id="newTaskProject">
+                <option value="test">Example Project Name</option>
+              </select>
+              <button type="submit" id="newTaskBtn">Done</button>
+            </div>
+          </form>
         </div>
         <div class="taskItem">
           <div class="taskItemL">
