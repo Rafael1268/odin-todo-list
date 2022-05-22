@@ -41,8 +41,8 @@
           <button>Add Task</button>
         </div>
         <div id="newTask">
-          <form action="#">
-            <input type="text" name="newTaskTxt" id="newTaskTxt" minlength="1" maxlength="100" required>
+          <form>
+            <input type="text" name="newTaskTxt" id="newTaskTxt" minlength="1" maxlength="60" required>
             <div>
               <input type="date" name="newTaskDate" id="newTaskDate">
               <select name="newTaskPriority" id="newTaskPriority" required>
@@ -53,39 +53,11 @@
               <select name="newTaskProject" id="newTaskProject">
                 <option value="test">Example Project Name</option>
               </select>
-              <button type="submit" id="newTaskBtn">Done</button>
+              <button type="button" id="newTaskBtn">Done</button>
             </div>
           </form>
         </div>
-        <div class="taskItem">
-          <div class="taskItemL">
-            <button class="taskDoneBtn prior1"></button>
-            <p>Finish the odin project (TOP) plus some more text</p>
-          </div>
-          <div class="taskItemR">
-            <h6>12/06/2022</h6>
-            <button class="deleteBtn"><i class="fa-solid fa-trash"></i></button>
-          </div>
-        </div>
-        <div class="taskItem">
-          <div class="taskItemL">
-            <button class="taskDoneBtn prior3"></button>
-            <p>Finish the odin project (TOP) plus some more text</p>
-          </div>
-          <div class="taskItemR">
-            <h6>12/06/2022</h6>
-            <button class="deleteBtn"><i class="fa-solid fa-trash"></i></button>
-          </div>
-        </div>
-        <div class="taskItem">
-          <div class="taskItemL">
-            <button class="taskDoneBtn taskDone"></button>
-            <p class="taskComplete">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis fugit atque quaerat dolorem</p>
-          </div>
-          <div class="taskItemR">
-            <h6>12/06/2022</h6>
-            <button class="deleteBtn"><i class="fa-solid fa-trash"></i></button>
-          </div>
+        <div id="taskDisplay">
         </div>
       </div>
     </div>
