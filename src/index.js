@@ -1,3 +1,2 @@
-import { renderTasks } from './task';
-
-renderTasks();
+import { renderTasks } from './taskManagement';
+import { renderTask } from './render';
