@@ -172,7 +172,7 @@ nav {
   flex-direction: column;
 }
 
-#hideNewTaskField {
+.hideTaskField {
   display: none;
 }
 
