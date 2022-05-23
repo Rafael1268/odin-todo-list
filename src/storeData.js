@@ -60,4 +60,9 @@ function loadProjects() {
   };
 };
 
-export { saveTasks, loadTasks, saveProjects, loadProjects };
+// Clears storage
+function clearStorage() {
+  localStorage.clear();
+};
+
+export { saveTasks, loadTasks, saveProjects, loadProjects, clearStorage };

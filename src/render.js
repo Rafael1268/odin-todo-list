@@ -75,7 +75,11 @@ function renderTaskExpand(name, desc, date, prior, project) {
   const expandPrior = document.querySelector('#expandPrior');
   expandPrior.innerText = prior;
   const expandProject = document.querySelector('#expandProject');
-  expandProject.innerText = project;
+  if (project === '') {
+    expandProject.innerText = 'No Project Set'
+  } else {
+    expandProject.innerText = project;
+  };
 };
 
 // Renders a single project
