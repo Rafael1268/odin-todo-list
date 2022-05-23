@@ -1,16 +1,21 @@
 import { renderTask } from './render';
 import { saveData, loadData } from './storeData';
+import { isThisWeek, isToday, parseISO } from 'date-fns';
 
 const taskFieldSubmit = document.querySelector('#newTaskBtn');
 const sortByField = document.querySelector('#sortBy');
 const searchBarField = document.querySelector('#searchbar');
+const sidebarButtons = document.querySelectorAll('button.sidebarBtn')
 
 taskFieldSubmit.addEventListener('click', () => addTask());
 sortByField.addEventListener('change', () => renderTasks());
 searchBarField.addEventListener('change', () => renderTasks());
+sidebarButtons.forEach(button => button.addEventListener('click', () => changeFilterBy(event)));
 
 let taskArray = [];
+let filteredArray = [];
 let sortedArray = [];
+let filterBy = 'all'
 
 // Loads saved data, then renders the tasks
 const loadedData = loadData();
@@ -91,6 +96,7 @@ function downElementIds(num) {
 function renderTasks() {
   const taskDisplay = document.querySelector('#taskDisplay');
   checkSortBy();
+  checkFilterBy();
   searchTasks();
   taskDisplay.innerHTML = '';
   sortedArray.forEach(task => {
@@ -101,11 +107,72 @@ function renderTasks() {
 // Checks if user has anything typed in the search bar and if they do, filters the tasks correctly.
 function searchTasks() {
   if (searchBarField.value === '') {
-    sortedArray = taskArray;
+    sortedArray = filteredArray;
   };
-  const searched = taskArray.filter(task => task.task.toLowerCase().includes(searchBarField.value.toLowerCase()));
+  const searched = filteredArray.filter(task => task.task.toLowerCase().includes(searchBarField.value.toLowerCase()));
   sortedArray = searched;
 }
+
+function changeFilterBy(e) {
+  switch (e.target.textContent) {
+    case ' All Tasks':
+      filterBy = 'all';
+      break;
+    case ' Today':
+      filterBy = 'today';
+      break;
+    case ' This Week':
+      filterBy = 'week';
+      break;
+    default:
+      filterBy = e.target.textContent;
+      break;
+  };
+  renderTasks();
+ };
+
+function checkFilterBy() {
+  const filterTxt = document.querySelector('#currentFilter');
+  switch (filterBy) {
+    case 'all':
+      filterTxt.innerText = 'All Tasks';
+      filterByAll();
+      break;
+    case 'today':
+      filterTxt.innerText = 'Due Today';
+      filterByToday();
+      break;
+    case 'week':
+      filterTxt.innerText = 'Due This Week';
+      filterByWeek();
+      break;
+    default:
+      filterByProject();
+      break;
+  };
+};
+
+function filterByAll() {
+  filteredArray = taskArray;
+};
+
+function filterByToday() {
+  const filterToday = taskArray.filter(task => {
+    const parsedDate = parseISO(task.date);
+    return isToday(parsedDate);
+  });
+  filteredArray = filterToday;
+};
+
+function filterByWeek() {
+  const filterWeek = taskArray.filter(task => {
+    const parsedDate = parseISO(task.date);
+    return isThisWeek(parsedDate);
+  });
+  filteredArray = filterWeek;
+};
+
+
 
 // Checks what is should sort by and calls the correct function
 function checkSortBy() {
