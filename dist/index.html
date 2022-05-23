@@ -54,7 +54,7 @@
         <div class="newTask hideTaskField">
           <form>
             <input type="text" name="newTaskTxt" id="newTaskTxt" minlength="1" maxlength="45" placeholder="Task Name" required>
-            <textarea name="newTaskDesc" id="newTaskDesc" cols="89" rows="5" placeholder="Task Description" required></textarea>
+            <textarea name="newTaskDesc" id="newTaskDesc" cols="89" rows="5" maxlength="300" placeholder="Task Description" required></textarea>
             <div>
               <input type="date" name="newTaskDate" id="newTaskDate">
               <select name="newTaskPriority" id="newTaskPriority" required>
@@ -71,6 +71,31 @@
         <div id="taskDisplay">
         </div>
       </div>
+    </div>
+  </div>
+  <div class="taskExpandContainer hideTaskExpand">
+    <div class="taskExpand">
+      <div>
+        <h3>Name</h3>
+        <p id="expandName"></p>
+      </div>
+      <div>
+        <h3>Description</h3>
+        <p id="expandDesc"></p>
+      </div>
+      <div>
+        <h3>Due Date</h3>
+        <p id="expandDate"></p>
+      </div>
+      <div>
+        <h3>Priority</h3>
+        <p id="expandPrior"></p>
+      </div>
+      <div>
+        <h3>Project</h3>
+        <p id="expandProject"></p>
+      </div>
+      <button id="taskExpandClose">Close</button>
     </div>
   </div>
   <script src="main.js"></script>
