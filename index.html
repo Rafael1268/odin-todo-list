@@ -23,7 +23,7 @@
           <button id="newProject"><i class="fa-solid fa-folder-plus"></i></button>
         </div>
         <form class="newProjectForm hideProjectField">
-          <input type="text" name="newProjectTxt" id="newProjectTxt" minlength="1" maxlength="20" required>
+          <input type="text" name="newProjectTxt" id="newProjectTxt" minlength="1" maxlength="20" placeholder="Project Name" required>
           <button type="button" id="newProjectDone">Done</button>
         </form>
         <div id="projectsDisplay">
@@ -34,7 +34,7 @@
       <nav>
         <div id="search">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="search" name="searchbar" id="searchbar">
+          <input type="search" name="searchbar" id="searchbar" placeholder="Search">
         </div>
         <div id="sorting">
           <label for="sortBy">Sort By:</label>
@@ -53,7 +53,8 @@
         </div>
         <div class="newTask hideTaskField">
           <form>
-            <input type="text" name="newTaskTxt" id="newTaskTxt" minlength="1" maxlength="60" required>
+            <input type="text" name="newTaskTxt" id="newTaskTxt" minlength="1" maxlength="45" placeholder="Task Name" required>
+            <textarea name="newTaskDesc" id="newTaskDesc" cols="89" rows="5" placeholder="Task Description" required></textarea>
             <div>
               <input type="date" name="newTaskDate" id="newTaskDate">
               <select name="newTaskPriority" id="newTaskPriority" required>
