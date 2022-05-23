@@ -255,7 +255,8 @@ nav {
   align-items: center;
 }
 
-#newTaskTxt {
+#newTaskTxt,
+#editName {
   background-color: var(--dark-color);
   color: var(--light-color);
   border: none;
@@ -266,11 +267,12 @@ nav {
   padding: 5px 15px;
 }
 
-#newTaskDesc {
+#newTaskDesc,
+#editDesc {
   background-color: var(--dark-color);
   color: var(--light-color);
   border: none;
-  resize: vertical;
+  resize: none;
   font-size: 1.2rem;
   width: 814px;
   margin-bottom: 15px;
@@ -280,7 +282,10 @@ nav {
 #newTaskDate,
 #newTaskPriority,
 #newTaskProject,
-#newTaskBtn {
+#newTaskBtn,
+#editDate,
+#editPrior,
+#editProject {
   background-color: var(--dark-color);
   color: var(--main-color);
   border: none;
@@ -288,6 +293,12 @@ nav {
   font-size: 1.1rem;
   font-weight: bold;
   margin-left: 15px;
+}
+
+#editDate,
+#editPrior,
+#editProject {
+  padding: 10px 15px;
 }
 
 #newTaskDate {
@@ -328,9 +339,14 @@ nav {
   align-self: flex-end;
 }
 
-.deleteBtn {
+.deleteBtn,
+.editBtn {
   background: none;
   border: none;
+}
+
+.editBtn {
+  margin-left: 10px;
 }
 
 .taskDoneBtn {
@@ -360,8 +376,9 @@ nav {
   text-decoration: line-through;
 }
 
-/* Task Expand Popup */
-.taskExpandContainer {
+/* Popups */
+.taskExpandContainer,
+.taskEditContainer {
   background-color: rgba(1, 1, 1, 0.7);
   position: fixed;
   display: flex;
@@ -376,7 +393,8 @@ nav {
   display: none;
 }
 
-.taskExpand {
+.taskExpand,
+.taskEditField {
   background-color: var(--darkest-color);
   border-radius: 10px;
   position: fixed;
@@ -397,7 +415,8 @@ nav {
   align-items: center;
 }
 
-.taskExpand h3 {
+.taskExpand h3,
+.taskEditField h3 {
   font-size: 1.1rem;
   font-weight: bold;
   color: var(--main-color);
@@ -407,9 +426,12 @@ nav {
   font-size: 1.2rem;
   color: var(--light-color);
   margin: 5px 0 20px 0;
+  word-break: break-all;
 }
 
-#taskExpandClose {
+#taskExpandClose,
+#taskEditSubmit,
+#taskEditCancel {
   background-color: var(--dark-color);
   border: none;
   border-radius: 5px;
@@ -417,4 +439,28 @@ nav {
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--main-color);
+  margin: 0 10px;
+}
+
+.editDiv,
+.editDiv2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskEditField h3 {
+  margin: 15px 0 5px 0;
+}
+
+.editSelections {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.taskEditBtns {
+  display: flex;
+  margin-top: 25px;
 }

@@ -58,7 +58,7 @@
         <div class="newTask hideTaskField">
           <form>
             <input type="text" name="newTaskTxt" id="newTaskTxt" minlength="1" maxlength="45" placeholder="Task Name" required>
-            <textarea name="newTaskDesc" id="newTaskDesc" cols="89" rows="5" maxlength="300" placeholder="Task Description" required></textarea>
+            <textarea name="newTaskDesc" id="newTaskDesc" cols="89" rows="6" maxlength="300" placeholder="Task Description" required></textarea>
             <div>
               <input type="date" name="newTaskDate" id="newTaskDate">
               <select name="newTaskPriority" id="newTaskPriority" required>
@@ -100,6 +100,42 @@
       </div>
       <button id="taskExpandClose">Close</button>
     </div>
+  </div>
+  <div class="taskEditContainer hideTaskExpand">
+    <form class="taskEditField">
+      <div class="editDiv">
+        <h3>Name</h3>
+        <input type="text" name="editName" id="editName" minlength="1" maxlength="45">
+      </div>
+      <div class="editDiv">
+        <h3>Description</h3>
+        <textarea name="editDesc" id="editDesc" cols="89" rows="6" maxlength="300" required></textarea>
+      </div>
+      <div class="editSelections">
+        <div class="editDiv2">
+          <h3>Due Date</h3>
+          <input type="date" name="editDate" id="editDate">
+        </div>
+        <div class="editDiv2">
+          <h3>Priority</h3>
+          <select name="editPrior" id="editPrior" required>
+            <option value="1">Priority 1</option>
+            <option value="2">Priority 2</option>
+            <option value="3">Priority 3</option>
+          </select>
+        </div>
+        <div class="editDiv2">
+          <h3>Project</h3>
+          <select name="editProject" id="editProject">
+            <option value="temp">test</option>
+          </select>
+        </div>
+      </div>
+      <div class="taskEditBtns">
+        <button type="button" id="taskEditSubmit">Submit</button>
+        <button type="button" id="taskEditCancel">Cancel</button>
+      </div>
+    </form>
   </div>
   <script src="main.js"></script>
 </body>
