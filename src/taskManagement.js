@@ -1,4 +1,4 @@
-import { renderTask, renderProject } from './render';
+import { renderTask, renderTaskExpand, renderProject } from './render';
 import { saveTasks, loadTasks, saveProjects, loadProjects } from './storeData';
 import { isThisWeek, isToday, parseISO } from 'date-fns';
 
@@ -28,8 +28,9 @@ const loadedProjects = loadProjects();
 projectArray = loadedProjects;
 renderProjects();
 
-function CreateTask(task, date, priority, project, taskId) {
+function CreateTask(task, description, date, priority, project, taskId) {
   this.task = task
+  this.description = description
   this.date = date
   this.priority = priority
   this.project = project
@@ -45,22 +46,28 @@ function CreateProject(project, projectId) {
 // Add a new task to the taskArray
 function addTask() {
   const newTaskTxt = document.querySelector('#newTaskTxt');
+  const newTaskDesc = document.querySelector('#newTaskDesc');
   const newTaskDate = document.querySelector('#newTaskDate');
   const newTaskPriority = document.querySelector('#newTaskPriority');
   const newTaskProject = document.querySelector('#newTaskProject');
-  const newTask = new CreateTask(newTaskTxt.value, newTaskDate.value, newTaskPriority.value, newTaskProject.value, taskArray.length);
+  const taskField = document.querySelector('.newTask');
+  const newTask = new CreateTask(newTaskTxt.value, newTaskDesc.value, newTaskDate.value, newTaskPriority.value, newTaskProject.value, taskArray.length);
   taskArray.push(newTask);
+  console.log(newTask.taskId);
   saveTasks(taskArray);
+  taskField.classList.toggle('hideTaskField');
   renderTasks();
 };
 
 // Add a new project to the projectArray
 function addProject() {
   const newProjectTxt = document.querySelector('#newProjectTxt');
+  const projectField = document.querySelector('.newProjectForm');
   if (projectArray.find(project => project.project === newProjectTxt.value) !== undefined) return;
   const newProject = new CreateProject(newProjectTxt.value, projectArray.length);
   projectArray.push(newProject);
   saveProjects(projectArray);
+  projectField.classList.toggle('hideProjectField')
   renderProjects();
 };
 
@@ -75,6 +82,23 @@ function removeTask(e) {
   downElementIds(targetId);
   saveTasks(taskArray);
   renderTasks();
+};
+
+// Shows a popup which gives more info about the task
+function expandTask(e) {
+  if (e.target.tagName === 'BUTTON' || e.target.tagName === 'I') return;
+  let targetId;
+  if (e.target.tagName !== 'DIV') {
+    targetId = e.target.parentElement.parentElement.id;
+  } else {
+    targetId = e.target.id;
+  };
+  const index = taskArray.findIndex(task => task.taskId === Number(targetId));
+  if (index === -1) return;
+  const t = taskArray[index];
+  renderTaskExpand(t.task, t.description, t.date, t.priority, t.project);
+  const taskExpandPopup = document.querySelector('.taskExpandContainer');
+  taskExpandPopup.classList.remove('hideTaskExpand');
 };
 
 // Toggles if the task is done or not
@@ -177,6 +201,7 @@ function checkFilterBy() {
       filterByWeek();
       break;
     default:
+      filterTxt.innerText = filterBy;
       filterByProject();
       break;
   };
@@ -257,4 +282,4 @@ function sortPriorUp() {
   });
 };
 
-export { renderTasks, removeTask, taskDoneToggle, changeFilterBy };
+export { renderTasks, removeTask, taskDoneToggle, changeFilterBy, expandTask };

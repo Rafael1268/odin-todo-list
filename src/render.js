@@ -1,12 +1,15 @@
-import { removeTask, taskDoneToggle, changeFilterBy } from './taskManagement';
+import { removeTask, taskDoneToggle, changeFilterBy, expandTask } from './taskManagement';
 
 const taskFieldBtn = document.querySelector('#addTaskBtn');
 const taskField = document.querySelector('.newTask');
 const newProjectBtn = document.querySelector('#newProject');
 const projectField = document.querySelector('.newProjectForm');
+const taskExpandClose = document.querySelector('#taskExpandClose');
+const taskExpandPopup = document.querySelector('.taskExpandContainer');
 
 taskFieldBtn.addEventListener('click', () => taskField.classList.toggle('hideTaskField'));
 newProjectBtn.addEventListener('click', () => projectField.classList.toggle('hideProjectField'));
+taskExpandClose.addEventListener('click', () => taskExpandPopup.classList.add('hideTaskExpand'));
 
 // Renders a single task
 function renderTask(task) {
@@ -50,6 +53,28 @@ function renderTask(task) {
   taskItemR.appendChild(deleteBtn);
   deleteBtn.addEventListener('click', () => removeTask(event));
   taskDisplay.appendChild(taskItem);
+  taskItem.addEventListener('click', () => expandTask(event));
+};
+
+function renderTaskExpand(name, desc, date, prior, project) {
+  const expandName = document.querySelector('#expandName');
+  expandName.innerText = name;
+  const expandDesc = document.querySelector('#expandDesc');
+  if (desc === '') {
+    expandDesc.innerText = 'No Description Set';
+  } else {
+    expandDesc.innerText = desc;
+  };
+  const expandDate = document.querySelector('#expandDate');
+  if (date === '') {
+    expandDate.innerText = 'No Date Set';
+  } else {
+    expandDate.innerText = date;
+  };
+  const expandPrior = document.querySelector('#expandPrior');
+  expandPrior.innerText = prior;
+  const expandProject = document.querySelector('#expandProject');
+  expandProject.innerText = project;
 };
 
 // Renders a single project
@@ -67,4 +92,4 @@ function renderProject(project) {
   newTaskProjectList.appendChild(newOption);
 };
 
-export { renderTask, renderProject };
+export { renderTask, renderTaskExpand, renderProject };
