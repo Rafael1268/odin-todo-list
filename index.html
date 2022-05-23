@@ -13,13 +13,21 @@
     <div id="sidebar">
       <div id="mainControls">
         <h1>NextUp</h1>
-        <button><i class="fa-solid fa-folder-open fa-fw"></i> All Tasks</button>
-        <button><i class="fa-solid fa-calendar-day fa-fw"></i> Today</button>
-        <button><i class="fa-solid fa-calendar-week fa-fw"></i> This Week</button>
+        <button class="sidebarBtn"><i class="fa-solid fa-folder-open fa-fw"></i> All Tasks</button>
+        <button class="sidebarBtn"><i class="fa-solid fa-calendar-day fa-fw"></i> Today</button>
+        <button class="sidebarBtn"><i class="fa-solid fa-calendar-week fa-fw"></i> This Week</button>
       </div>
       <div id="projects">
-        <h2>Projects</h2>
-        <button><i class="fa-solid fa-folder fa-fw"></i> Example Project Name</button>
+        <div id="projectsTitle">
+          <h2>Projects</h2>
+          <button id="newProject"><i class="fa-solid fa-folder-plus"></i></button>
+        </div>
+        <form class="newProjectForm hideProjectField">
+          <input type="text" name="newProjectTxt" id="newProjectTxt" minlength="1" maxlength="20" required>
+          <button type="button" id="newProjectDone">Done</button>
+        </form>
+        <div id="projectsDisplay">
+        </div>
       </div>
     </div>
     <div id="tasks">
@@ -40,7 +48,7 @@
       </nav>
       <div id="taskList">
         <div id="header">
-          <h1>All Tasks</h1>
+          <h1 id="currentFilter">All Tasks</h1>
           <button id="addTaskBtn">Add Task</button>
         </div>
         <div class="newTask hideTaskField">
@@ -54,7 +62,6 @@
                 <option value="3">Priority 3</option>
               </select>
               <select name="newTaskProject" id="newTaskProject">
-                <option value="test">Example Project Name</option>
               </select>
               <button type="button" id="newTaskBtn">Done</button>
             </div>

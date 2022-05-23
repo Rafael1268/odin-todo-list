@@ -23,8 +23,7 @@ h1 {
 
 h2 {
   color: var(--main-color);
-  margin-top: 25px;
-  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 h6 {
@@ -45,7 +44,22 @@ h6 {
   padding-left: 25px;
 }
 
-#sidebar button {
+#projectsTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+#newProject {
+  background: none;
+  border: none;
+  color: var(--main-color);
+  font-size: 1.3rem;
+}
+
+.sidebarBtn {
   background: none;
   border: none;
   border-radius: 10px;
@@ -53,10 +67,11 @@ h6 {
   font-size: 1.2rem;
   font-weight: 600;
   padding: 10px;
+  margin-left: -10px;
   transition: 0.15s;
 }
 
-#sidebar button:hover {
+.sidebarBtn:hover {
   background-color: var(--dark-color);
 }
 
@@ -66,15 +81,55 @@ h6 {
   align-items: flex-start;
 }
 
+#mainControls h1 {
+  margin-bottom: 10px;
+}
+
 #projects {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
+.newProjectForm {
+  background-color: var(--dark-color);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hideProjectField {
+  display: none;
+}
+
+#newProjectTxt {
+  background-color: var(--darkest-color);
+  border: none;
+  font-size: 1.2rem;
+  color: var(--light-color);
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  width: 210px;
+}
+
+#projectsDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.newProjectForm button {
+  background-color: var(--darkest-color);
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--main-color);
+  padding: 5px 0;
+}
+
 #projects button {
-  /* text-overflow: ellipsis;
-  overflow: hidden; */
   white-space: nowrap;
 }
 
