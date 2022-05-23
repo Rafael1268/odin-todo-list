@@ -1,4 +1,4 @@
-import { renderTask } from './render';
+import { renderTask, renderProject } from './render';
 import { saveData, loadData } from './storeData';
 import { isThisWeek, isToday, parseISO } from 'date-fns';
 
@@ -6,16 +6,19 @@ const taskFieldSubmit = document.querySelector('#newTaskBtn');
 const sortByField = document.querySelector('#sortBy');
 const searchBarField = document.querySelector('#searchbar');
 const sidebarButtons = document.querySelectorAll('button.sidebarBtn')
+const newProjectDone = document.querySelector('#newProjectDone');
 
 taskFieldSubmit.addEventListener('click', () => addTask());
 sortByField.addEventListener('change', () => renderTasks());
 searchBarField.addEventListener('change', () => renderTasks());
 sidebarButtons.forEach(button => button.addEventListener('click', () => changeFilterBy(event)));
+newProjectDone.addEventListener('click', () => addProject());
 
 let taskArray = [];
 let filteredArray = [];
 let sortedArray = [];
 let filterBy = 'all'
+let projectArray = [];
 
 // Loads saved data, then renders the tasks
 const loadedData = loadData();
@@ -31,6 +34,11 @@ function CreateTask(task, date, priority, project, taskId) {
   this.taskDone = false;
 };
 
+function CreateProject(project, projectId) {
+  this.project = project
+  this.projectId = projectId
+};
+
 // Add a new task to the taskArray
 function addTask() {
   const newTaskTxt = document.querySelector('#newTaskTxt');
@@ -41,6 +49,15 @@ function addTask() {
   taskArray.push(newTask);
   saveData(taskArray);
   renderTasks();
+};
+
+// Add a new project to the projectArray
+function addProject() {
+  const newProjectTxt = document.querySelector('#newProjectTxt');
+  if (projectArray.find(project => project.project === newProjectTxt.value) !== undefined) return;
+  const newProject = new CreateProject(newProjectTxt.value, projectArray.length);
+  projectArray.push(newProject);
+  renderProjects();
 };
 
 // Removes task 
@@ -102,6 +119,15 @@ function renderTasks() {
   sortedArray.forEach(task => {
     renderTask(task);
   });
+};
+
+// Renders all the projects
+function renderProjects() {
+  const projectDisplay = document.querySelector('#projectsDisplay');
+  const newTaskProjectList = document.querySelector('#newTaskProject');
+  projectDisplay.innerHTML = '';
+  newTaskProjectList.innerHTML = '';
+  projectArray.forEach(project => renderProject(project));
 };
 
 // Checks if user has anything typed in the search bar and if they do, filters the tasks correctly.
@@ -172,7 +198,13 @@ function filterByWeek() {
   filteredArray = filterWeek;
 };
 
-
+function filterByProject() {
+  const filterProject = taskArray.filter(task => {
+    const slicedStr = filterBy.slice(1);
+    return task.project === slicedStr;
+  });
+  filteredArray = filterProject;
+};
 
 // Checks what is should sort by and calls the correct function
 function checkSortBy() {
@@ -221,4 +253,4 @@ function sortPriorUp() {
   });
 };
 
-export { renderTasks, removeTask, taskDoneToggle };
+export { renderTasks, removeTask, taskDoneToggle, changeFilterBy };

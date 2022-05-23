@@ -1,9 +1,12 @@
-import { removeTask, taskDoneToggle } from './taskManagement';
+import { removeTask, taskDoneToggle, changeFilterBy } from './taskManagement';
 
 const taskFieldBtn = document.querySelector('#addTaskBtn');
 const taskField = document.querySelector('.newTask');
+const newProjectBtn = document.querySelector('#newProject');
+const projectField = document.querySelector('.newProjectForm');
 
 taskFieldBtn.addEventListener('click', () => taskField.classList.toggle('hideTaskField'));
+newProjectBtn.addEventListener('click', () => projectField.classList.toggle('hideProjectField'));
 
 // Renders a single task
 function renderTask(task) {
@@ -49,4 +52,19 @@ function renderTask(task) {
   taskDisplay.appendChild(taskItem);
 };
 
-export { renderTask };
+// Renders a single project
+function renderProject(project) {
+  const projectDisplay = document.querySelector('#projectsDisplay');
+  const projectBtn = document.createElement('button');
+  projectBtn.className = 'sidebarBtn'
+  projectBtn.innerHTML = `<i class="fa-solid fa-folder fa-fw"></i> ${project.project}`
+  projectDisplay.appendChild(projectBtn);
+  projectBtn.addEventListener('click', () => changeFilterBy(event));
+  const newTaskProjectList = document.querySelector('#newTaskProject');
+  const newOption = document.createElement('option');
+  newOption.value = project.project;
+  newOption.innerText = project.project;
+  newTaskProjectList.appendChild(newOption);
+};
+
+export { renderTask, renderProject };
