@@ -194,7 +194,25 @@ nav {
   margin-top: 150px;
 }
 
-#header button {
+#header div {
+  display: flex;
+  align-items: center;
+}
+
+#header h1 {
+  margin-right: 15px;
+}
+
+.deleteProject {
+  background: none;
+  border: none;
+}
+
+.hideDeleteProject {
+  display: none;
+}
+
+#addTaskBtn {
   background-color: var(--darkest-color);
   border: none;
   border-radius: 15px;
