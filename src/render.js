@@ -1,4 +1,4 @@
-import { removeTask, taskDoneToggle, changeFilterBy, expandTask } from './taskManagement';
+import { removeTask, taskDoneToggle, changeFilterBy, expandTask, editTask, editTaskPopup } from './taskManagement';
 
 const taskFieldBtn = document.querySelector('#addTaskBtn');
 const taskField = document.querySelector('.newTask');
@@ -6,10 +6,15 @@ const newProjectBtn = document.querySelector('#newProject');
 const projectField = document.querySelector('.newProjectForm');
 const taskExpandClose = document.querySelector('#taskExpandClose');
 const taskExpandPopup = document.querySelector('.taskExpandContainer');
+const taskEditCancel = document.querySelector('#taskEditCancel');
+const taskEdit = document.querySelector('.taskEditContainer');
+const TaskEditSubmit = document.querySelector('#taskEditSubmit');
 
 taskFieldBtn.addEventListener('click', () => taskField.classList.toggle('hideTaskField'));
 newProjectBtn.addEventListener('click', () => projectField.classList.toggle('hideProjectField'));
 taskExpandClose.addEventListener('click', () => taskExpandPopup.classList.add('hideTaskExpand'));
+taskEditCancel.addEventListener('click', () => taskEdit.classList.add('hideTaskExpand'));
+TaskEditSubmit.addEventListener('click', () => editTask());
 
 // Renders a single task
 function renderTask(task) {
@@ -52,6 +57,11 @@ function renderTask(task) {
   deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
   taskItemR.appendChild(deleteBtn);
   deleteBtn.addEventListener('click', () => removeTask(event));
+  const editBtn = document.createElement('button');
+  editBtn.className = 'editBtn';
+  editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+  taskItemR.appendChild(editBtn);
+  editBtn.addEventListener('click', () => editTaskPopup(event));
   taskDisplay.appendChild(taskItem);
   taskItem.addEventListener('click', () => expandTask(event));
 };
@@ -82,6 +92,26 @@ function renderTaskExpand(name, desc, date, prior, project) {
   };
 };
 
+// Renders the popup that lets you edit a task
+function renderTaskEdit(name, desc, date, prior, project, projects) {
+  const editName = document.querySelector('#editName');
+  editName.value = name;
+  const editDesc = document.querySelector('#editDesc');
+  editDesc.value = desc;
+  const editDate = document.querySelector('#editDate');
+  editDate.value = date;
+  const editPrior = document.querySelector('#editPrior');
+  editPrior.value = prior;
+  const editProject = document.querySelector('#editProject');
+  projects.forEach(p => {
+    const pOption = document.createElement('option');
+    pOption.innerText = p.project;
+    pOption.value = p.project;
+    editProject.appendChild(pOption);
+  });
+  editProject.value = project;
+};
+
 // Renders a single project
 function renderProject(project) {
   const projectDisplay = document.querySelector('#projectsDisplay');
@@ -97,4 +127,4 @@ function renderProject(project) {
   newTaskProjectList.appendChild(newOption);
 };
 
-export { renderTask, renderTaskExpand, renderProject };
+export { renderTask, renderTaskExpand, renderTaskEdit, renderProject };

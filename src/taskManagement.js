@@ -1,6 +1,6 @@
-import { renderTask, renderTaskExpand, renderProject } from './render';
+import { renderTask, renderTaskExpand, renderTaskEdit, renderProject } from './render';
 import { saveTasks, loadTasks, saveProjects, loadProjects } from './storeData';
-import { isPast, isThisWeek, isToday, parseISO } from 'date-fns';
+import { formatISO, isPast, isThisWeek, isToday, lightFormat, parseISO } from 'date-fns';
 
 const taskFieldSubmit = document.querySelector('#newTaskBtn');
 const sortByField = document.querySelector('#sortBy');
@@ -21,6 +21,7 @@ let filteredArray = [];
 let sortedArray = [];
 let filterBy = 'all'
 let projectArray = [];
+let currentEdit = '';
 
 // Loads saved data, then renders the data
 const loadedTasks = loadTasks();
@@ -28,6 +29,10 @@ taskArray = loadedTasks;
 renderTasks();
 const loadedProjects = loadProjects();
 projectArray = loadedProjects;
+if (!loadedProjects[0]) {
+  const defaultProjectSelection = new CreateProject('None');
+  projectArray.unshift(defaultProjectSelection);
+};
 renderProjects();
 
 function CreateTask(task, description, date, priority, project, taskId) {
@@ -120,6 +125,36 @@ function expandTask(e) {
   taskExpandPopup.classList.remove('hideTaskExpand');
 };
 
+// Shows a popup which lets you edit the task
+function editTaskPopup(e) {
+  const targetId = e.target.parentElement.parentElement.parentElement.id;
+  const index = taskArray.findIndex(task => task.taskId === Number(targetId));
+  if (index === -1) return;
+  const t = taskArray[index];
+  currentEdit = taskArray[index];
+  renderTaskEdit(t.task, t.description, t.date, t.priority, t.project, projectArray);
+  const taskEdit = document.querySelector('.taskEditContainer');
+  taskEdit.classList.remove('hideTaskExpand');
+};
+
+// Edits a task
+function editTask() {
+  const editName = document.querySelector('#editName');
+  const editDesc = document.querySelector('#editDesc');
+  const editDate = document.querySelector('#editDate');
+  const editPrior = document.querySelector('#editPrior');
+  const editProject = document.querySelector('#editProject');
+  currentEdit.task = editName.value;
+  currentEdit.description = editDesc.value;
+  currentEdit.date = editDate.value;
+  currentEdit.priority = editPrior.value;
+  currentEdit.project = editProject.value;
+  saveTasks(taskArray);
+  renderTasks();
+  const taskEdit = document.querySelector('.taskEditContainer');
+  taskEdit.classList.add('hideTaskExpand');
+};
+
 // Toggles if the task is done or not
 function taskDoneToggle(e) {
   const targetId = Number(e.target.parentElement.parentElement.id);
@@ -201,6 +236,9 @@ function changeFilterBy(e) {
     case ' Past Due':
       filterBy = 'past';
       break;
+    case ' None':
+      filterBy = ' None';
+      break;
     default:
       filterBy = e.target.textContent;
       break;
@@ -231,6 +269,11 @@ function checkFilterBy() {
       filterTxt.innerText = 'Past Due';
       deleteProject.classList.add('hideDeleteProject');
       filterByPast();
+      break;
+    case ' None':
+      filterTxt.innerText = 'Tasks Without A Project';
+      deleteProject.classList.add('hideDeleteProject');
+      filterByProject();
       break;
     default:
       filterTxt.innerText = filterBy;
@@ -328,4 +371,4 @@ function sortPriorUp() {
   });
 };
 
-export { renderTasks, removeTask, taskDoneToggle, changeFilterBy, expandTask };
+export { renderTasks, removeTask, taskDoneToggle, changeFilterBy, expandTask, editTask, editTaskPopup };
