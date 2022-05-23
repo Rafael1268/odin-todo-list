@@ -23,6 +23,16 @@ let filterBy = 'all'
 let projectArray = [];
 let currentEdit = '';
 
+const scaleUpAnimation = [
+  { transform: 'scale(0)' },
+  { transform: 'scale(1)' }
+];
+
+const scaleDownAnimation = [
+  { transform: 'scale(1)' },
+  { transform: 'scale(0)' }
+];
+
 // Loads saved data, then renders the data
 const loadedTasks = loadTasks();
 taskArray = loadedTasks;
@@ -57,6 +67,7 @@ function addTask() {
   const newTaskPriority = document.querySelector('#newTaskPriority');
   const newTaskProject = document.querySelector('#newTaskProject');
   const taskField = document.querySelector('.newTask');
+  if (newTaskTxt.value === '') return alert('Please fill in the "Task Name" field');
   const newTask = new CreateTask(newTaskTxt.value, newTaskDesc.value, newTaskDate.value, newTaskPriority.value, newTaskProject.value, taskArray.length);
   taskArray.push(newTask);
   saveTasks(taskArray);
@@ -68,7 +79,8 @@ function addTask() {
 function addProject() {
   const newProjectTxt = document.querySelector('#newProjectTxt');
   const projectField = document.querySelector('.newProjectForm');
-  if (projectArray.find(project => project.project === newProjectTxt.value) !== undefined) return;
+  if (newProjectTxt.value === '') return alert('Please fill in the "Project Name" field');
+  if (projectArray.find(project => project.project === newProjectTxt.value) !== undefined) return alert('That project already exists');
   const newProject = new CreateProject(newProjectTxt.value);
   projectArray.push(newProject);
   saveProjects(projectArray);
@@ -123,6 +135,8 @@ function expandTask(e) {
   renderTaskExpand(t.task, t.description, t.date, t.priority, t.project);
   const taskExpandPopup = document.querySelector('.taskExpandContainer');
   taskExpandPopup.classList.remove('hideTaskExpand');
+  const taskExpand = document.querySelector('.taskExpand');
+  taskExpand.animate(scaleUpAnimation, 250);
 };
 
 // Shows a popup which lets you edit the task
@@ -135,6 +149,8 @@ function editTaskPopup(e) {
   renderTaskEdit(t.task, t.description, t.date, t.priority, t.project, projectArray);
   const taskEdit = document.querySelector('.taskEditContainer');
   taskEdit.classList.remove('hideTaskExpand');
+  const taskEditField = document.querySelector('.taskEditField');
+  taskEditField.animate(scaleUpAnimation, 250);
 };
 
 // Edits a task
@@ -152,7 +168,11 @@ function editTask() {
   saveTasks(taskArray);
   renderTasks();
   const taskEdit = document.querySelector('.taskEditContainer');
-  taskEdit.classList.add('hideTaskExpand');
+  const taskEditField = document.querySelector('.taskEditField');
+  taskEditField.animate(scaleDownAnimation, 150);
+  setTimeout(function(){
+    taskEdit.classList.add('hideTaskExpand')
+  }, 150);
 };
 
 // Toggles if the task is done or not

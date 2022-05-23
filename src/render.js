@@ -10,10 +10,27 @@ const taskEditCancel = document.querySelector('#taskEditCancel');
 const taskEdit = document.querySelector('.taskEditContainer');
 const TaskEditSubmit = document.querySelector('#taskEditSubmit');
 
+const scaleDownAnimation = [
+  { transform: 'scale(1)' },
+  { transform: 'scale(0)' }
+];
+
 taskFieldBtn.addEventListener('click', () => taskField.classList.toggle('hideTaskField'));
 newProjectBtn.addEventListener('click', () => projectField.classList.toggle('hideProjectField'));
-taskExpandClose.addEventListener('click', () => taskExpandPopup.classList.add('hideTaskExpand'));
-taskEditCancel.addEventListener('click', () => taskEdit.classList.add('hideTaskExpand'));
+taskExpandClose.addEventListener('click', () => {
+  const taskExpand = document.querySelector('.taskExpand');
+  taskExpand.animate(scaleDownAnimation, 150);
+  setTimeout(function(){
+    taskExpandPopup.classList.add('hideTaskExpand');
+  }, 150);
+});
+taskEditCancel.addEventListener('click', () => {
+  const taskEditField = document.querySelector('.taskEditField');
+  taskEditField.animate(scaleDownAnimation, 150);
+  setTimeout(function(){
+    taskEdit.classList.add('hideTaskExpand')
+  }, 150);
+});
 TaskEditSubmit.addEventListener('click', () => editTask());
 
 // Renders a single task
