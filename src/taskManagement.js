@@ -1,4 +1,5 @@
 import { renderTask } from './render';
+import { saveData, loadData } from './storeData';
 
 const taskFieldSubmit = document.querySelector('#newTaskBtn');
 const sortByField = document.querySelector('#sortBy');
@@ -10,6 +11,11 @@ searchBarField.addEventListener('change', () => renderTasks());
 
 let taskArray = [];
 let sortedArray = [];
+
+// Loads saved data, then renders the tasks
+const loadedData = loadData();
+taskArray = loadedData;
+renderTasks();
 
 function CreateTask(task, date, priority, project, taskId) {
   this.task = task
@@ -27,6 +33,7 @@ function addTask() {
   const newTaskProject = document.querySelector('#newTaskProject');
   const newTask = new CreateTask(newTaskTxt.value, newTaskDate.value, newTaskPriority.value, newTaskProject.value, taskArray.length);
   taskArray.push(newTask);
+  saveData(taskArray);
   renderTasks();
 };
 
@@ -39,6 +46,7 @@ function removeTask(e) {
   taskArray.splice(taskIndex, 1);
   downArrayIds(targetId);
   downElementIds(targetId);
+  saveData(taskArray);
   renderTasks();
 };
 
@@ -65,7 +73,6 @@ function downElementIds(num) {
 
 // Renders all the tasks
 function renderTasks() {
-  console.log(taskArray)
   const taskDisplay = document.querySelector('#taskDisplay');
   checkSortBy();
   searchTasks();
