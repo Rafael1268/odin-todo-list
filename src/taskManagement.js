@@ -167,6 +167,7 @@ function searchTasks() {
   sortedArray = searched;
 }
 
+// Changes what the tasks are filtered by
 function changeFilterBy(e) {
   switch (e.target.textContent) {
     case ' All Tasks':
@@ -185,6 +186,7 @@ function changeFilterBy(e) {
   renderTasks();
  };
 
+ // Checks what tasks should be filtered by and calls the correct function
 function checkFilterBy() {
   const filterTxt = document.querySelector('#currentFilter');
   switch (filterBy) {
@@ -207,10 +209,12 @@ function checkFilterBy() {
   };
 };
 
+// Shows all tasks
 function filterByAll() {
   filteredArray = taskArray;
 };
 
+// Shows tasks with a due date of today
 function filterByToday() {
   const filterToday = taskArray.filter(task => {
     const parsedDate = parseISO(task.date);
@@ -219,6 +223,7 @@ function filterByToday() {
   filteredArray = filterToday;
 };
 
+// Shows tasks with a due date that is this week
 function filterByWeek() {
   const filterWeek = taskArray.filter(task => {
     const parsedDate = parseISO(task.date);
@@ -227,6 +232,7 @@ function filterByWeek() {
   filteredArray = filterWeek;
 };
 
+// Shows tasks that are in a certain project
 function filterByProject() {
   const filterProject = taskArray.filter(task => {
     const slicedStr = filterBy.slice(1);

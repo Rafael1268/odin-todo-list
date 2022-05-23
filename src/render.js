@@ -56,6 +56,7 @@ function renderTask(task) {
   taskItem.addEventListener('click', () => expandTask(event));
 };
 
+// Renders the popup that shows more info about a task
 function renderTaskExpand(name, desc, date, prior, project) {
   const expandName = document.querySelector('#expandName');
   expandName.innerText = name;

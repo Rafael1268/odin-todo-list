@@ -1,4 +1,4 @@
-// Saves tasksto localStorage
+// Saves tasks to localStorage
 function saveTasks(a) {
   try {
     localStorage.setItem('tasksArray', JSON.stringify(a));
@@ -29,6 +29,7 @@ function loadTasks() {
   };
 };
 
+// Saves projects to localStorage
 function saveProjects(a) {
   try {
     localStorage.setItem('projectsArray', JSON.stringify(a));
@@ -50,6 +51,7 @@ function saveProjects(a) {
   };
 };
 
+// Checks if user has any projects saved, if they do loads projects
 function loadProjects() {
   if(!localStorage.getItem('projectsArray')) {
     return [];
