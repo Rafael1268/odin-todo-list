@@ -23,6 +23,7 @@ function CreateTask(task, date, priority, project, taskId) {
   this.priority = priority
   this.project = project
   this.taskId = taskId
+  this.taskDone = false;
 };
 
 // Add a new task to the taskArray
@@ -46,6 +47,21 @@ function removeTask(e) {
   taskArray.splice(taskIndex, 1);
   downArrayIds(targetId);
   downElementIds(targetId);
+  saveData(taskArray);
+  renderTasks();
+};
+
+// Toggles if the task is done or not
+function taskDoneToggle(e) {
+  const targetId = Number(e.target.parentElement.parentElement.id);
+  const matchesId = (task) => task.taskId === targetId;
+  const taskIndex = taskArray.findIndex(matchesId);
+  if (taskIndex === -1) return;
+  if (taskArray[taskIndex].taskDone === false) {
+    taskArray[taskIndex].taskDone = true;
+  } else {
+    taskArray[taskIndex].taskDone = false;
+  };
   saveData(taskArray);
   renderTasks();
 };
@@ -138,4 +154,4 @@ function sortPriorUp() {
   });
 };
 
-export { renderTasks, removeTask };
+export { renderTasks, removeTask, taskDoneToggle };

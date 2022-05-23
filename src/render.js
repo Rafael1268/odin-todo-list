@@ -1,4 +1,4 @@
-import { removeTask } from './taskManagement';
+import { removeTask, taskDoneToggle } from './taskManagement';
 
 const taskFieldBtn = document.querySelector('#addTaskBtn');
 const taskField = document.querySelector('.newTask');
@@ -30,9 +30,14 @@ function renderTask(task) {
       break;
   };
   taskItemL.appendChild(taskDoneBtn);
+  taskDoneBtn.addEventListener('click', () => taskDoneToggle(event));
   const taskText = document.createElement('p');
   taskText.innerText = task.task;
   taskItemL.appendChild(taskText);
+  if (task.taskDone === true) {
+    taskDoneBtn.classList.add('taskDone');
+    taskText.classList.add('taskComplete');
+  };
   const taskDate = document.createElement('h6');
   taskDate.innerText = task.date;
   taskItemR.appendChild(taskDate);
