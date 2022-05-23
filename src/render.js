@@ -120,6 +120,7 @@ function renderTaskEdit(name, desc, date, prior, project, projects) {
   const editPrior = document.querySelector('#editPrior');
   editPrior.value = prior;
   const editProject = document.querySelector('#editProject');
+  editProject.innerHTML = '';
   projects.forEach(p => {
     const pOption = document.createElement('option');
     pOption.innerText = p.project;
