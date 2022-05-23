@@ -341,3 +341,62 @@ nav {
 .taskComplete {
   text-decoration: line-through;
 }
+
+/* Task Expand Popup */
+.taskExpandContainer {
+  background-color: rgba(1, 1, 1, 0.7);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+}
+
+.hideTaskExpand {
+  display: none;
+}
+
+.taskExpand {
+  background-color: var(--darkest-color);
+  border-radius: 10px;
+  position: fixed;
+  z-index: 1;
+  padding: 25px;
+  min-width: 400px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskExpand div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskExpand h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.taskExpand p {
+  font-size: 1.2rem;
+  color: var(--light-color);
+  margin: 5px 0 20px 0;
+}
+
+#taskExpandClose {
+  background-color: var(--dark-color);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 35px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--main-color);
+}
