@@ -1,5 +1,5 @@
 import { renderTask, renderProject } from './render';
-import { saveData, loadData } from './storeData';
+import { saveTasks, loadTasks, saveProjects, loadProjects } from './storeData';
 import { isThisWeek, isToday, parseISO } from 'date-fns';
 
 const taskFieldSubmit = document.querySelector('#newTaskBtn');
@@ -20,10 +20,13 @@ let sortedArray = [];
 let filterBy = 'all'
 let projectArray = [];
 
-// Loads saved data, then renders the tasks
-const loadedData = loadData();
-taskArray = loadedData;
+// Loads saved data, then renders the data
+const loadedTasks = loadTasks();
+taskArray = loadedTasks;
 renderTasks();
+const loadedProjects = loadProjects();
+projectArray = loadedProjects;
+renderProjects();
 
 function CreateTask(task, date, priority, project, taskId) {
   this.task = task
@@ -47,7 +50,7 @@ function addTask() {
   const newTaskProject = document.querySelector('#newTaskProject');
   const newTask = new CreateTask(newTaskTxt.value, newTaskDate.value, newTaskPriority.value, newTaskProject.value, taskArray.length);
   taskArray.push(newTask);
-  saveData(taskArray);
+  saveTasks(taskArray);
   renderTasks();
 };
 
@@ -57,6 +60,7 @@ function addProject() {
   if (projectArray.find(project => project.project === newProjectTxt.value) !== undefined) return;
   const newProject = new CreateProject(newProjectTxt.value, projectArray.length);
   projectArray.push(newProject);
+  saveProjects(projectArray);
   renderProjects();
 };
 
@@ -69,7 +73,7 @@ function removeTask(e) {
   taskArray.splice(taskIndex, 1);
   downArrayIds(targetId);
   downElementIds(targetId);
-  saveData(taskArray);
+  saveTasks(taskArray);
   renderTasks();
 };
 
@@ -84,7 +88,7 @@ function taskDoneToggle(e) {
   } else {
     taskArray[taskIndex].taskDone = false;
   };
-  saveData(taskArray);
+  saveTasks(taskArray);
   renderTasks();
 };
 
